@@ -4,10 +4,10 @@
 <p>The AI is from : https://www.imooc.com/learn/639</p>
 
 <h2>The updates:</h2>
-<p>1, Set the background color of chess board to Yellow.<br>
-2, Add the sign for the last step.<br>
-3, Forbid the 3-3 connection when going first.<br>
+<p>1, Set the background color of chess board to Yellow. --done<br>
+2, Add the sign for the last step.  --to do<br>
+3, Forbid the 3-3 connection when going first.  --to do<br>
 4, Set a table to choose <br>
-   A: Whether the oppsite is human or computer?<br>
-   B: Go first or last, use black or white?<br>
-   C: Add the "1" sign for the last step.</p>
+&nbsp&nbsp A: Whether the oppsite is human or computer?  --to do<br>
+&nbsp&nbsp B: Go first or last, use black or white?  --to do<br>
+&nbsp&nbsp C: Add the "1" sign for the last step.  -- to do</p>

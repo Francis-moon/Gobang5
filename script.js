@@ -15,6 +15,8 @@ function first() {
 }
 function last() {
     alert("准备执白vs电脑 - 开始")
+    oneStep(7,7,black);
+    black = !black;
     chess.onclick = singleLast;
 }
 
@@ -71,8 +73,7 @@ var singleFirst = function firstVScomputer(e)  {   //执黑面对电脑，落子
     if(over){
         return;
     }
-    //电脑走棋
-    if(!black){
+    if(!black){         //电脑走棋
         return;
     }
     var x = e.offsetX;
@@ -104,7 +105,7 @@ var singleLast = function lastVScomputer(e)  {   //执白面对电脑，落子�
         return;
     }
     if(black) {
-        computerAI();
+        return;
     }
     var x = e.offsetX;
     var y = e.offsetY;
@@ -125,6 +126,7 @@ var singleLast = function lastVScomputer(e)  {   //执白面对电脑，落子�
       }
       if(!over){
           black =!black;
+          computerAI()
       }
     }
 }

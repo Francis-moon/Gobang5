@@ -81,9 +81,8 @@ var singleFirst = function firstVScomputer(e)  {   //执黑面对电脑，落子
     var j = Math.floor(y / 30);
     if(chessBoard[i][j]==0){   //等于0表示该点可以落子
       oneStep(i,j,black);
-          chessBoard[i][j]=1;  //我落子
-      //定义赢法
-      for(var k=0; k<count; k++) {
+      chessBoard[i][j]=1;     //我落子
+      for(var k=0; k<count; k++) {      //判断黑棋是否赢了
           if(wins[i][j][k]) {
               myWin[k]++;
               uWin[k] = 6; //异常情况
@@ -99,13 +98,13 @@ var singleFirst = function firstVScomputer(e)  {   //执黑面对电脑，落子
       }
     }
 }
+
 var singleLast = function lastVScomputer(e)  {   //执白面对电脑，落子在e点
     if(over) {
         return;
     }
     if(black) {
         computerAI();
-        black =!black;
     }
     var x = e.offsetX;
     var y = e.offsetY;
@@ -113,9 +112,8 @@ var singleLast = function lastVScomputer(e)  {   //执白面对电脑，落子�
     var j = Math.floor(y / 30);
     if(chessBoard[i][j]==0){   //等于0表示该点可以落子
       oneStep(i,j,black);
-          chessBoard[i][j]=1;  //我落子
-      //定义赢法
-      for(var k=0; k<count; k++) {
+      chessBoard[i][j]=1;     //我落子
+      for(var k=0; k<count; k++) {      //判断黑棋是否赢了
           if(wins[i][j][k]) {
               myWin[k]++;
               uWin[k] = 6; //异常情况
@@ -124,6 +122,9 @@ var singleLast = function lastVScomputer(e)  {   //执白面对电脑，落子�
                 over = true;
               }
           }
+      }
+      if(!over){
+          black =!black;
       }
     }
 }
@@ -140,28 +141,33 @@ var doublePersons = function pVSp(e)  {   //双人对弈，落子在e点
       oneStep(i,j,black);
       if(black) {
           chessBoard[i][j]=1;  //记录黑棋落子
+          for(var k=0; k<count; k++) {      //判断黑棋是否赢了
+            if(wins[i][j][k]) {
+                myWin[k]++;
+                uWin[k] = 6; //异常情况
+                if(myWin[k] == 5) {
+                  window.alert("恭喜，黑棋赢了");
+                  over = true;
+                }
+            }
+          }
         }
         else {
           chessBoard[i][j]=2;   //记录白棋落子
-        }
-       black =!black;
-      //定义赢法
-      for(var k=0; k<count; k++) {
-          if(wins[i][j][k]) {
-              myWin[k]++;
-              uWin[k] = 6; //异常情况
-              if(myWin[k] == 5) {
-                 if(black) {
-                 window.alert("恭喜，白棋赢了");
-                 over = true;
-                 }
-                 else {
-                 window.alert("恭喜，黑棋赢了");
-                 over = true;
-                 }
-              }
+          for(var k=0; k<count; k++) {      //判断白棋是否赢了
+            if(wins[i][j][k]) {
+                uWin[k]++;
+                myWin[k] = 6; //异常情况
+                if(uWin[k] == 5) {
+                  window.alert("恭喜，白棋赢了");
+                  over = true;
+                }
+            }
           }
-      }
+        }
+        if(!over) {
+            black = !black;
+        }
     }
 }
 
@@ -295,7 +301,7 @@ var computerAI = function() {
     }
     console.log('max is', max); //查看权重
     //计算机落子
-    oneStep(u, v, false);  //false代表白棋
+    oneStep(u, v, black);  //false代表白棋
     chessBoard[u][v] = 2;  //记录为白棋
     for(var k=0; k<count; k++) {
         if(wins[u][v][k]) {

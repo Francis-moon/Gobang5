@@ -4,3 +4,18 @@ canvas{
     box-shadow: -2px -2px 2px #EFEFEF, 5px 5px 5px #B9B9B9;
     background-color: #FFCC55;
 }
+
+*{
+    padding: 0;
+    margin: 0;
+}
+
+#setting {
+    width: 100%;
+    margin: 0, auto;
+    text-align: center;
+}
+
+.hide{
+    display:none;
+}

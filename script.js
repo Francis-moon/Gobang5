@@ -15,8 +15,7 @@ function first() {
 }
 function last() {
     alert("准备执白vs电脑 - 开始")
-    oneStep(7,7,black);
-    black = !black;
+    computerAI();
     chess.onclick = singleLast;
 }
 
@@ -86,7 +85,7 @@ var singleFirst = function firstVScomputer(e)  {   //执黑面对电脑，落子
       for(var k=0; k<count; k++) {      //判断黑棋是否赢了
           if(wins[i][j][k]) {
               myWin[k]++;
-              uWin[k] = 6; //异常情况
+              uWin[k] = 6;    //异常情况
               if(myWin[k] == 5) {
                 window.alert("恭喜，你赢了");
                 over = true;
@@ -113,7 +112,7 @@ var singleLast = function lastVScomputer(e)  {   //执白面对电脑，落子�
     var j = Math.floor(y / 30);
     if(chessBoard[i][j]==0){   //等于0表示该点可以落子
       oneStep(i,j,black);
-      chessBoard[i][j]=1;     //我落子
+      chessBoard[i][j] = 1;     //我落子
       for(var k=0; k<count; k++) {      //判断黑棋是否赢了
           if(wins[i][j][k]) {
               myWin[k]++;
@@ -222,6 +221,7 @@ for(var i=0; i<11; i++){
 
 console.log("总共的赢法数量是",count); //查看总共的赢法数量
 
+
 //赢法的统计数组，到5的时候就赢了
 var myWin=[];
 var uWin=[];
@@ -262,13 +262,13 @@ var computerAI = function() {
                             myScore[i][j] += 10000;
                         }
                         if(uWin[k] == 1){
-                            uScore[i][j] += 220;
+                            uScore[i][j] += 380;    //以前是220
                         }
                         else if(uWin[k] == 2){
-                            uScore[i][j] += 420;
+                            uScore[i][j] += 820;    //以前是420
                         }
                         else if(uWin[k] == 3){
-                             uScore[i][j] += 2100;
+                             uScore[i][j] += 2100;  //以前是2100
                         }
                         else if(uWin[k] == 4){
                              uScore[i][j] += 20000;
@@ -301,10 +301,13 @@ var computerAI = function() {
             }
         }
     }
-    console.log('max is', max); //查看权重
     //计算机落子
+    if(max == 0) {        //黑先第一步在天元
+        u = 7;
+        v = 7;
+    }
     oneStep(u, v, black);  //false代表白棋
-    chessBoard[u][v] = 2;  //记录为白棋
+    chessBoard[u][v] = 2;  //记录computer落子
     for(var k=0; k<count; k++) {
         if(wins[u][v][k]) {
             uWin[k]++;
